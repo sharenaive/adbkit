@@ -1,5 +1,11 @@
 # adbkit
 
+# 关于 fork adbkit 库
+
+因为 adbkit@2.11.1 不支持 removeall-forward removeall-reverse，
+
+故此，参考 https://android.googlesource.com/platform/packages/modules/adb/+/master/SERVICES.TXT 所述的 adb 协议在本库进行添增。
+
 # Warning
 
 # This project along with other ones in [OpenSTF](https://github.com/openstf) organisation is provided as is for community, without active development.

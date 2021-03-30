@@ -25,6 +25,7 @@ GetPropertiesCommand = require './command/host-transport/getproperties'
 InstallCommand = require './command/host-transport/install'
 IsInstalledCommand = require './command/host-transport/isinstalled'
 ListReversesCommand = require './command/host-transport/listreverses'
+RemoveallReversesCommand = require './command/host-transport/removeallreverses'
 LocalCommand = require './command/host-transport/local'
 LogcatCommand = require './command/host-transport/logcat'
 LogCommand = require './command/host-transport/log'
@@ -50,6 +51,7 @@ GetDevicePathCommand = require './command/host-serial/getdevicepath'
 GetSerialNoCommand = require './command/host-serial/getserialno'
 GetStateCommand = require './command/host-serial/getstate'
 ListForwardsCommand = require './command/host-serial/listforwards'
+RemoveallForwardsCommand = require './command/host-serial/removeallforwards'
 WaitForDeviceCommand = require './command/host-serial/waitfordevice'
 
 TcpUsbServer = require './tcpusb/server'
@@ -198,6 +200,13 @@ class Client
           .execute serial
       .nodeify callback
 
+  removeallForwards: (serial, callback) ->
+    this.connection()
+      .then (conn) ->
+        new RemoveallForwardsCommand conn
+          .execute serial
+      .nodeify callback
+
   reverse: (serial, remote, local, callback) ->
     this.transport serial
       .then (transport) ->
@@ -209,6 +218,13 @@ class Client
     this.transport serial
       .then (transport) ->
         new ListReversesCommand transport
+          .execute()
+      .nodeify callback
+
+  removeallReverses: (serial, callback) ->
+    this.transport serial
+      .then (transport) ->
+        new RemoveallReversesCommand transport
           .execute()
       .nodeify callback
 
